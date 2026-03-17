@@ -1,5 +1,24 @@
 import SwiftUI
 import WebKit
+import AppKit
+
+// 1. Subclasse para garantir o foco de teclado e eventos de rato
+class ClickableWebView: WKWebView {
+    override var acceptsFirstResponder: Bool { true }
+    
+    override func mouseDown(with event: NSEvent) {
+        // Forçar a app e a janela a tornarem-se ativas ao clicar na WebView
+        NSApp.activate(ignoringOtherApps: true)
+        self.window?.makeKeyAndOrderFront(nil)
+        self.window?.makeFirstResponder(self)
+        super.mouseDown(with: event)
+    }
+}
+
+// 2. Pool de processos partilhado para consistência de sessão
+class WebViewProcessPool {
+    static let shared = WKProcessPool()
+}
 
 public struct MainView: View {
     @StateObject var manager = DebateManager()
@@ -29,125 +48,56 @@ public struct MainView: View {
             }
         }
         .frame(minWidth: 1100, minHeight: 800)
-    }
-}
-
-struct ClientHeader: View {
-    let role: AgentRole
-    @Binding var client: AIClient
-    
-    var body: some View {
-        VStack(spacing: 4) {
-            Text(role.rawValue.uppercased())
-                .font(.caption.bold())
-                .foregroundColor(.white)
-            
-            Picker("", selection: $client) {
-                ForEach(AIClient.allCases) { client in
-                    Text(client.rawValue).tag(client)
-                }
-            }
-            .pickerStyle(.menu)
-            .frame(width: 150)
+        .onAppear {
+            // Garantir que a App toma o foco ao abrir
+            NSApp.activate(ignoringOtherApps: true)
         }
-        .padding(.vertical, 8)
-        .frame(maxWidth: .infinity)
-        .background(role == .optimist ? Color.green.opacity(0.8) : Color.red.opacity(0.8))
     }
 }
 
-struct ControlPanelView: View {
-    @ObservedObject var manager: DebateManager
-    
-    var body: some View {
-        HStack(alignment: .center, spacing: 20) {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Image(systemName: "pencil.and.outline")
-                    Text("Configuração do Debate").font(.headline)
-                }
-                
-                TextField("Tema do Debate (ex: Futuro de Marte)", text: $manager.theme)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                HStack {
-                    Button(action: {
-                        FileService.pickFile { url in
-                            if let url = url, let text = FileService.extractText(from: url) {
-                                manager.contextFromFile = text
-                            }
-                        }
-                    }) {
-                        Label(manager.contextFromFile.isEmpty ? "Anexar Ficheiro" : "Ficheiro Anexado ✅", systemImage: "paperclip")
-                    }
-                    .buttonStyle(.bordered)
-                    
-                    if !manager.contextFromFile.isEmpty {
-                        Button(action: { manager.contextFromFile = "" }) {
-                            Image(systemName: "trash")
-                        }
-                        .buttonStyle(.plain)
-                        .foregroundColor(.red)
-                    }
-                    
-                    Spacer()
-                    
-                    Text("Rondas:")
-                    Stepper("\(manager.totalRounds)", value: $manager.totalRounds, in: 1...10)
-                }
-            }
-            .frame(width: 450)
-            
-            Divider().frame(height: 80)
-            
-            VStack(spacing: 15) {
-                Button(action: { manager.swapRoles() }) {
-                    Label("Inverter Papéis", systemImage: "arrow.left.and.right")
-                        .frame(width: 150)
-                }
-                .buttonStyle(.bordered)
-                
-                Button(action: { /* Iniciar */ }) {
-                    Text("INICIAR DEBATE")
-                        .bold()
-                        .frame(width: 150, height: 40)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.blue)
-            }
-            
-            Spacer()
-            
-            VStack {
-                Button(action: { /* PDF */ }) {
-                    VStack {
-                        Image(systemName: "doc.richtext").font(.title)
-                        Text("Relatórios")
-                    }
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        .padding()
-    }
-}
-
+// 3. Wrapper melhorado com injeção de hardware real e correção de foco
 struct WebViewWrapper: NSViewRepresentable {
     let url: URL
     
     func makeNSView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
-        config.websiteDataStore = .default() // Persistência de Cookies
+        config.processPool = WebViewProcessPool.shared
+        config.websiteDataStore = .default()
         
-        let webView = WKWebView(frame: .zero, configuration: config)
+        // Ativar funcionalidades de developer para ajudar na depuração se necessário
+        config.preferences.setValue(true, forKey: "developerExtrasEnabled")
         
-        // Stealth: Mudar User-Agent e Injetar Script Anti-Bot
-        webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+        let webView = ClickableWebView(frame: .zero, configuration: config)
         
+        // User-Agent de um Safari real em macOS Sonoma (mais fidedigno para WKWebView)
+        webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+        
+        // Script avançado de Stealth: Emula hardware e remove marcas de automação
         let stealthScriptContent = """
+        // 1. Remover flag de automação
         Object.defineProperty(navigator, 'webdriver', { get: () => false });
-        window.chrome = { runtime: {} };
+        
+        // 2. Emular propriedades de hardware reais
+        Object.defineProperty(navigator, 'deviceMemory', { get: () => 8 });
+        Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => 8 });
+        
+        // 3. Mock de plugins para parecer um browser real
+        Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+        
+        // 4. Corrigir permissões (sites de IA verificam isto)
+        const originalQuery = navigator.permissions.query;
+        navigator.permissions.query = (parameters) => (
+            parameters.name === 'notifications' ?
+            Promise.resolve({ state: Notification.permission }) :
+            originalQuery(parameters)
+        );
+
+        // 5. Garantir que cliques são processados como 'Trusted'
+        window.addEventListener('mousedown', () => {
+            window.focus();
+        }, true);
         """
+        
         let stealthScript = WKUserScript(source: stealthScriptContent, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         config.userContentController.addUserScript(stealthScript)
         
@@ -161,3 +111,4 @@ struct WebViewWrapper: NSViewRepresentable {
         }
     }
 }
+...
