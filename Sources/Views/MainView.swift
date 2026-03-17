@@ -6,46 +6,50 @@ struct MainView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Painel de Controlo Superior
             ControlPanelView(manager: manager)
-                .frame(height: 120)
+                .frame(height: 140)
                 .background(Color(NSColor.windowBackgroundColor))
             
             Divider()
             
-            // Zona de Debate (Split View)
             HStack(spacing: 0) {
-                // IA 1
                 VStack(spacing: 0) {
-                    LabelBanner(role: manager.agent1Role)
-                    WebViewWrapper(url: URL(string: "https://chatgpt.com")!)
+                    ClientHeader(role: manager.agent1Role, client: $manager.agent1Client)
+                    WebViewWrapper(url: manager.agent1Client.url)
                 }
                 
                 Divider()
                 
-                // IA 2
                 VStack(spacing: 0) {
-                    LabelBanner(role: manager.agent2Role)
-                    WebViewWrapper(url: URL(string: "https://claude.ai")!)
+                    ClientHeader(role: manager.agent2Role, client: $manager.agent2Client)
+                    WebViewWrapper(url: manager.agent2Client.url)
                 }
             }
         }
-        .frame(minWidth: 1000, minHeight: 700)
+        .frame(minWidth: 1100, minHeight: 800)
     }
 }
 
-struct LabelBanner: View {
+struct ClientHeader: View {
     let role: AgentRole
+    @Binding var client: AIClient
     
     var body: some View {
-        HStack {
-            Spacer()
+        VStack(spacing: 4) {
             Text(role.rawValue.uppercased())
-                .font(.headline)
+                .font(.caption.bold())
                 .foregroundColor(.white)
-            Spacer()
+            
+            Picker("", selection: $client) {
+                ForEach(AIClient.allCases) { client in
+                    Text(client.rawValue).tag(client)
+                }
+            }
+            .pickerStyle(.menu)
+            .frame(width: 150)
         }
         .padding(.vertical, 8)
+        .frame(maxWidth: .infinity)
         .background(role == .optimist ? Color.green.opacity(0.8) : Color.red.opacity(0.8))
     }
 }
@@ -55,45 +59,71 @@ struct ControlPanelView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 20) {
-            VStack(alignment: .leading) {
-                Text("Tema do Debate").font(.caption).bold()
-                TextField("Ex: O impacto da IA no emprego...", text: $manager.theme)
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Image(systemName: "pencil.and.outline")
+                    Text("Configuração do Debate").font(.headline)
+                }
+                
+                TextField("Tema do Debate (ex: Futuro de Marte)", text: $manager.theme)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-            }
-            .frame(width: 300)
-            
-            VStack {
-                Text("Rondas").font(.caption).bold()
-                Stepper("\(manager.totalRounds)", value: $manager.totalRounds, in: 1...10)
-            }
-            
-            Button(action: {
-                manager.swapRoles()
-            }) {
-                VStack {
-                    Image(systemName: "arrow.left.and.right.righttriangle.left.and.righttriangle.right")
-                    Text("Inverter Papéis").font(.caption2)
+                
+                HStack {
+                    Button(action: {
+                        FileService.pickFile { url in
+                            if let url = url, let text = FileService.extractText(from: url) {
+                                manager.contextFromFile = text
+                            }
+                        }
+                    }) {
+                        Label(manager.contextFromFile.isEmpty ? "Anexar Ficheiro" : "Ficheiro Anexado ✅", systemImage: "paperclip")
+                    }
+                    .buttonStyle(.bordered)
+                    
+                    if !manager.contextFromFile.isEmpty {
+                        Button(action: { manager.contextFromFile = "" }) {
+                            Image(systemName: "trash")
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundColor(.red)
+                    }
+                    
+                    Spacer()
+                    
+                    Text("Rondas:")
+                    Stepper("\(manager.totalRounds)", value: $manager.totalRounds, in: 1...10)
                 }
             }
-            .buttonStyle(.bordered)
+            .frame(width: 450)
             
-            Button(action: {
-                // Iniciar Debate
-            }) {
-                Text("Iniciar Debate")
-                    .bold()
-                    .frame(width: 120, height: 40)
+            Divider().frame(height: 80)
+            
+            VStack(spacing: 15) {
+                Button(action: { manager.swapRoles() }) {
+                    Label("Inverter Papéis", systemImage: "arrow.left.and.right")
+                        .frame(width: 150)
+                }
+                .buttonStyle(.bordered)
+                
+                Button(action: { /* Iniciar */ }) {
+                    Text("INICIAR DEBATE")
+                        .bold()
+                        .frame(width: 150, height: 40)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.blue)
             
             Spacer()
             
-            Button(action: {
-                // Ver Histórico / PDF
-            }) {
-                Image(systemName: "doc.text.magnifyingglass")
-                Text("Relatórios")
+            VStack {
+                Button(action: { /* PDF */ }) {
+                    VStack {
+                        Image(systemName: "doc.richtext").font(.title)
+                        Text("Relatórios")
+                    }
+                }
+                .buttonStyle(.plain)
             }
         }
         .padding()
@@ -111,5 +141,9 @@ struct WebViewWrapper: NSViewRepresentable {
         return webView
     }
     
-    func updateNSView(_ nsView: WKWebView, context: Context) {}
+    func updateNSView(_ nsView: WKWebView, context: Context) {
+        if nsView.url?.host != url.host {
+            nsView.load(URLRequest(url: url))
+        }
+    }
 }
