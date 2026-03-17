@@ -1,10 +1,12 @@
 import SwiftUI
 import WebKit
 
-struct MainView: View {
+public struct MainView: View {
     @StateObject var manager = DebateManager()
     
-    var body: some View {
+    public init() {}
+    
+    public var body: some View {
         VStack(spacing: 0) {
             ControlPanelView(manager: manager)
                 .frame(height: 140)
@@ -135,14 +137,26 @@ struct WebViewWrapper: NSViewRepresentable {
     
     func makeNSView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
+        config.websiteDataStore = .default() // Persistência de Cookies
+        
         let webView = WKWebView(frame: .zero, configuration: config)
-        webView.customUserAgent = StealthService.userAgent
+        
+        // Stealth: Mudar User-Agent e Injetar Script Anti-Bot
+        webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+        
+        let stealthScriptContent = """
+        Object.defineProperty(navigator, 'webdriver', { get: () => false });
+        window.chrome = { runtime: {} };
+        """
+        let stealthScript = WKUserScript(source: stealthScriptContent, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        config.userContentController.addUserScript(stealthScript)
+        
         webView.load(URLRequest(url: url))
         return webView
     }
     
     func updateNSView(_ nsView: WKWebView, context: Context) {
-        if nsView.url?.host != url.host {
+        if let currentURL = nsView.url, currentURL.host != url.host {
             nsView.load(URLRequest(url: url))
         }
     }
