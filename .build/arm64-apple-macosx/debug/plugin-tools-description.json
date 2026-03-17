@@ -1,0 +1,340 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.Bota_Faladura_Pro_Max-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "fileList" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/sources",
+      "importPath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Bota_Faladura_Pro_MaxApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/DebateManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/FileService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/PDFGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/StealthService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Views/MainView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "Bota_Faladura_Pro_Max",
+      "moduleOutputPath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Modules/Bota_Faladura_Pro_Max.swiftmodule",
+      "objects" : [
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/Bota_Faladura_Pro_MaxApp.swift.o",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/DebateManager.swift.o",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/Models.swift.o",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/FileService.swift.o",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/PDFGenerator.swift.o",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/StealthService.swift.o",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/MainView.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx12.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "Bota_Faladura_Pro_Max_main",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-F",
+        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+        "-sdk",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "bota_faladura_pro_max"
+      ],
+      "outputFileMapPath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/Bota_Faladura_Pro_MaxApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/DebateManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/Models.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/FileService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/PDFGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/StealthService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/MainView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Modules/Bota_Faladura_Pro_Max.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Bota_Faladura_Pro_MaxApp.swift",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/DebateManager.swift",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/Models.swift",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/FileService.swift",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/PDFGenerator.swift",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/StealthService.swift",
+        "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Views/MainView.swift"
+      ],
+      "tempsPath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "Bota_Faladura_Pro_Max" : [
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc",
+      "-module-name",
+      "Bota_Faladura_Pro_Max",
+      "-package-name",
+      "bota_faladura_pro_max",
+      "-incremental",
+      "-c",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Bota_Faladura_Pro_MaxApp.swift",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/DebateManager.swift",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/Models.swift",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/FileService.swift",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/PDFGenerator.swift",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/StealthService.swift",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Views/MainView.swift",
+      "-I",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx12.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "Bota_Faladura_Pro_Max_main",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-F",
+      "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
+      "-sdk",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "bota_faladura_pro_max",
+      "-driver-use-frontend-path",
+      "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "Bota_Faladura_Pro_Max" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "enableAllTraits" : false
+  },
+  "writeCommands" : {
+    "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max-entitlement.plist"
+    },
+    "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Bota_Faladura_Pro_MaxApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/DebateManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Models/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/FileService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/PDFGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Services/StealthService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/Sources/Views/MainView.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/sources"
+    },
+    "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/Bota_Faladura_Pro_MaxApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/DebateManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/FileService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/MainView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/Models.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/PDFGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.build/StealthService.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/Bota_Faladura_Pro_Max.product/Objects.LinkFileList"
+    },
+    "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Library/Developer/CommandLineTools/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/bugsbunny/Projetos/Bota_Faladura_Pro_Max/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+    }
+  }
+}
